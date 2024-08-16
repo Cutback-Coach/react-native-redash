@@ -156,7 +156,6 @@ export const mixPath = (
 ) => {
   "worklet";
   // Allows processing of paths with different lengths
-  const maxY = Math.max(...p2.curves.map((c) => c.c1.y));
   if (p1.curves.length !== p2.curves.length) {
     if (p1.curves.length < p2.curves.length) {
         const p1a = {
@@ -168,9 +167,9 @@ export const mixPath = (
                 c.c2.x = p1.curves?.[index].c2.x ?? 0;
                 c.to.x = p1.curves?.[index].to.x ?? 0;
 
-                c.c1.y = maxY;
-                c.c2.y = maxY;
-                c.to.y = maxY;
+                c.c1.y = p1.curves?.[index].c1.y ?? 0;
+                c.c2.y = p1.curves?.[index].c2.y ?? 0;
+                c.to.y = p1.curves?.[index].to.y ?? 0;
                 return c;
             })
         };
@@ -186,9 +185,9 @@ export const mixPath = (
                 c.c2.x = p2.curves?.[index].c2.x ?? 0;
                 c.to.x = p2.curves?.[index].to.x ?? 0;
 
-                c.c1.y = maxY;
-                c.c2.y = maxY;
-                c.to.y = maxY;
+                c.c1.y = p2.curves?.[index].c1.y ?? 0;
+                c.c2.y = p2.curves?.[index].c2.y ?? 0;
+                c.to.y = p2.curves?.[index].to.y ?? 0;
                 return c;
             })
         };
