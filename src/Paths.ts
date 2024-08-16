@@ -161,7 +161,7 @@ export const mixPath = (
         // const maxY = Math.max.apply(null, p2.curves.map((c) => c.c1.y));
         p2.curves.forEach((_curve, index) => {
             if (!p1.curves[index]) {
-                p1.curves[index] = p2.curves[index];
+                p1.curves[index] = p1.curves[p1.curves.length - 1]
             };
         });
     }
