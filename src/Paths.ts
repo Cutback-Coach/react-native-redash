@@ -163,9 +163,9 @@ export const mixPath = (
             curves: p2.curves.map((_curve, index) => {
                 const c = _curve;
 
-                c.c1.x = p1.curves?.[index].c1.x ?? 0;
-                c.c2.x = p1.curves?.[index].c2.x ?? 0;
-                c.to.x = p1.curves?.[index].to.x ?? 0;
+                c.c1.x = p1.curves?.[index]?.c1.x ?? 0;
+                c.c2.x = p1.curves?.[index]?.c2.x ?? 0;
+                c.to.x = p1.curves?.[index]?.to.x ?? 0;
 
                 c.c1.y = maxY;
                 c.c2.y = maxY;
@@ -181,9 +181,9 @@ export const mixPath = (
             curves: p1.curves.map((_curve, index) => {
                 const c = _curve;
 
-                c.c1.x = p2.curves?.[index].c1.x ?? 0;
-                c.c2.x = p2.curves?.[index].c2.x ?? 0;
-                c.to.x = p2.curves?.[index].to.x ?? 0;
+                c.c1.x = p2.curves?.[index]?.c1.x ?? 0;
+                c.c2.x = p2.curves?.[index]?.c2.x ?? 0;
+                c.to.x = p2.curves?.[index]?.to.x ?? 0;
 
                 c.c1.y = maxY;
                 c.c2.y = maxY;
