@@ -156,8 +156,9 @@ export const mixPath = (
 ) => {
   "worklet";
   // Allows processing of paths with different lengths
+  // TODO: cleanup logic
     if (p1.curves.length < p2.curves.length) {
-        const maxY = Math.max.apply(p2.curves.map((c) => c.c1.y));
+        const maxY = Math.max.apply(null, p2.curves.map((c) => c.c1.y));
         p2.curves.forEach((_curve, index) => {
             if (!p1.curves[index]) {
                 p1.curves[index] = {
@@ -178,7 +179,7 @@ export const mixPath = (
         });
     }
     if (p2.curves.length < p1.curves.length) {
-        const maxY = Math.max.apply(p2.curves.map((c) => c.c1.y));
+        const maxY = Math.max.apply(null, p2.curves.map((c) => c.c1.y));
         p1.curves.forEach((_curve, index) => {
             if (!p2.curves[index]) {
                 p2.curves[index] = {
