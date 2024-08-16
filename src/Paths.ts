@@ -80,6 +80,9 @@ export const interpolatePath = (
   extrapolate = Extrapolation.CLAMP
 ) => {
   "worklet";
+  const outputRangeIndex = outputRange[0].curves.length < outputRange[1].curves.length
+    ? 0
+    : 1;
   const path = {
     move: {
       x: interpolate(
@@ -95,7 +98,7 @@ export const interpolatePath = (
         extrapolate
       ),
     },
-    curves: outputRange[0].curves.map((_, index) => ({
+    curves: outputRange[outputRangeIndex].curves.map((_, index) => ({
       c1: {
         x: interpolate(
           value,
@@ -156,7 +159,6 @@ export const mixPath = (
 ) => {
   "worklet";
   // Allows processing of paths with different lengths
-  // TODO: cleanup logic
     if (p1.curves.length < p2.curves.length) {
         const maxY = Math.max.apply(null, p2.curves.map((c) => c.c1.y));
         p2.curves.forEach((_curve, index) => {
@@ -178,27 +180,6 @@ export const mixPath = (
             };
         });
     }
-//     if (p2.curves.length < p1.curves.length) {
-//         const maxY = Math.max.apply(null, p2.curves.map((c) => c.c1.y));
-//         p1.curves.forEach((_curve, index) => {
-//             if (!p2.curves[index]) {
-//                 p2.curves[index] = {
-//                     c1: {
-//                         x: 0,
-//                         y: maxY
-//                     },
-//                     c2: {
-//                         x: 0,
-//                         y: maxY
-//                     },
-//                     to: {
-//                         x: 0,
-//                         y: maxY
-//                     }
-//                 }
-//             };
-//         });
-//   }
   return interpolatePath(value, [0, 1], [p1, p2], extrapolate);
 };
 
