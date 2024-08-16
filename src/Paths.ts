@@ -178,27 +178,27 @@ export const mixPath = (
             };
         });
     }
-    if (p2.curves.length < p1.curves.length) {
-        const maxY = Math.max.apply(null, p2.curves.map((c) => c.c1.y));
-        p1.curves.forEach((_curve, index) => {
-            if (!p2.curves[index]) {
-                p2.curves[index] = {
-                    c1: {
-                        x: 0,
-                        y: maxY
-                    },
-                    c2: {
-                        x: 0,
-                        y: maxY
-                    },
-                    to: {
-                        x: 0,
-                        y: maxY
-                    }
-                }
-            };
-        });
-  }
+//     if (p2.curves.length < p1.curves.length) {
+//         const maxY = Math.max.apply(null, p2.curves.map((c) => c.c1.y));
+//         p1.curves.forEach((_curve, index) => {
+//             if (!p2.curves[index]) {
+//                 p2.curves[index] = {
+//                     c1: {
+//                         x: 0,
+//                         y: maxY
+//                     },
+//                     c2: {
+//                         x: 0,
+//                         y: maxY
+//                     },
+//                     to: {
+//                         x: 0,
+//                         y: maxY
+//                     }
+//                 }
+//             };
+//         });
+//   }
   return interpolatePath(value, [0, 1], [p1, p2], extrapolate);
 };
 
