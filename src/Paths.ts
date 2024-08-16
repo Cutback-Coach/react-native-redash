@@ -156,43 +156,47 @@ export const mixPath = (
 ) => {
   "worklet";
   // Allows processing of paths with different lengths
-  if (p1.curves.length !== p2.curves.length) {
     if (p1.curves.length < p2.curves.length) {
         const maxY = Math.max.apply(p2.curves.map((c) => c.c1.y));
-        const p1a = Object.assign({}, p1, {
-            curves: p2.curves.map((_curve, index) => {
-                const c = _curve;
-
-                c.c1.x = p1.curves?.[index]?.c1.x ?? 0;
-                c.c2.x = p1.curves?.[index]?.c2.x ?? 0;
-                c.to.x = p1.curves?.[index]?.to.x ?? 0;
-
-                c.c1.y = maxY;
-                c.c2.y = maxY;
-                c.to.y = maxY;
-                return c;
-            })
+        p2.curves.forEach((_curve, index) => {
+            if (!p1.curves[index]) {
+                p1.curves[index] = {
+                    c1: {
+                        x: 0,
+                        y: maxY
+                    },
+                    c2: {
+                        x: 0,
+                        y: maxY
+                    },
+                    to: {
+                        x: 0,
+                        y: maxY
+                    }
+                }
+            };
         });
-        return interpolatePath(value, [0, 1], [p1a, p2], extrapolate);
     }
     if (p2.curves.length < p1.curves.length) {
         const maxY = Math.max.apply(p2.curves.map((c) => c.c1.y));
-        const p2a = Object.assign({}, p2, {
-            curves: p1.curves.map((_curve, index) => {
-                const c = _curve;
-
-                c.c1.x = p2.curves?.[index]?.c1.x ?? 0;
-                c.c2.x = p2.curves?.[index]?.c2.x ?? 0;
-                c.to.x = p2.curves?.[index]?.to.x ?? 0;
-
-                c.c1.y = maxY;
-                c.c2.y = maxY;
-                c.to.y = maxY;
-                return c;
-            })
+        p1.curves.forEach((_curve, index) => {
+            if (!p2.curves[index]) {
+                p2.curves[index] = {
+                    c1: {
+                        x: 0,
+                        y: maxY
+                    },
+                    c2: {
+                        x: 0,
+                        y: maxY
+                    },
+                    to: {
+                        x: 0,
+                        y: maxY
+                    }
+                }
+            };
         });
-        return interpolatePath(value, [0, 1], [p1, p2a], extrapolate);
-    }
   }
   return interpolatePath(value, [0, 1], [p1, p2], extrapolate);
 };
